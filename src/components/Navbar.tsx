@@ -3,6 +3,7 @@ import { Shield, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ export function Navbar() {
                 About Us
               </Link>
             )}
+            <ThemeToggle />
             <Link to="/dashboard">
               <Button className="gradient-primary text-white shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] transition-all">
                 Dashboard
@@ -46,7 +48,8 @@ export function Navbar() {
             </Link>
           </nav>
 
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-1">
+            <ThemeToggle />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Menu">

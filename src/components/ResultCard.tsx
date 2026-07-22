@@ -52,21 +52,21 @@ export function ResultCard({ result, onGeneratePDF }) {
         <TextBlock title="Recommendation" text={result.recommendation} />
       </div>
 
-      <Alert className="mt-6 border-blue-200 bg-blue-50/70 backdrop-blur rounded-2xl">
-        <Info className="h-4 w-4 text-blue-600" />
-        <AlertDescription className="text-sm text-blue-900/80">
+      <Alert className="mt-6 border-blue-200 dark:border-blue-500/30 bg-blue-50/70 dark:bg-blue-500/10 backdrop-blur rounded-2xl">
+        <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+        <AlertDescription className="text-sm text-blue-900/80 dark:text-blue-200">
           This result is generated using AI and trusted drug data. It should never replace professional medical advice.
         </AlertDescription>
       </Alert>
 
-      <div className="mt-6 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50/70 p-5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between">
+      <div className="mt-6 rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-gradient-to-r from-emerald-50 to-teal-50/70 dark:from-emerald-500/10 dark:to-teal-500/5 p-5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500 text-white shadow-lg shadow-emerald-500/30">
             <CheckCircle2 className="h-5 w-5" />
           </div>
           <div className="text-center sm:text-left">
-            <div className="font-semibold text-emerald-900">Your report is ready.</div>
-            <div className="text-xs text-emerald-700/80">Download the full analysis as a PDF.</div>
+            <div className="font-semibold text-emerald-900 dark:text-emerald-200">Your report is ready.</div>
+            <div className="text-xs text-emerald-700/80 dark:text-emerald-400/80">Download the full analysis as a PDF.</div>
           </div>
         </div>
         <PDFButton variant="outline" onClick={onGeneratePDF} />
@@ -77,8 +77,8 @@ export function ResultCard({ result, onGeneratePDF }) {
 
 function DetailBox({ label, value }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/60 backdrop-blur p-4 flex items-center gap-3">
-      <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+    <div className="rounded-2xl border border-border bg-white/60 dark:bg-white/5 backdrop-blur p-4 flex items-center gap-3">
+      <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
         <Pill className="h-5 w-5" />
       </div>
       <div className="min-w-0">
@@ -91,9 +91,9 @@ function DetailBox({ label, value }) {
 
 function TextBlock({ title, text }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/50 backdrop-blur p-4">
-      <div className="text-xs font-semibold text-emerald-700 uppercase tracking-wide">{title}</div>
-      <p className="mt-1.5 text-sm text-slate-700 leading-relaxed">{text}</p>
+    <div className="rounded-2xl border border-border bg-white/50 dark:bg-white/5 backdrop-blur p-4">
+      <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">{title}</div>
+      <p className="mt-1.5 text-sm text-foreground/80 leading-relaxed">{text}</p>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export function About() {
     <section id="about" className="relative py-24 scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-medium text-emerald-700 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 text-xs font-medium text-emerald-700 dark:text-emerald-400 mb-4">
             About
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -55,7 +55,7 @@ export function About() {
           ))}
         </div>
 
-        <div className="mt-10 glass-card rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 border-0 bg-gradient-to-br from-emerald-50/80 to-blue-50/60">
+        <div className="mt-10 glass-card rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 border-0 bg-gradient-to-br from-emerald-50/80 to-blue-50/60 dark:from-emerald-500/10 dark:to-blue-500/5">
           <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl gradient-primary shadow-lg shadow-emerald-500/30">
             <ShieldCheck className="h-7 w-7 text-white" strokeWidth={2.5} />
           </div>
