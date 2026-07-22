@@ -61,7 +61,7 @@ function Dashboard() {
       <Navbar />
       <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="mb-8 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-medium text-emerald-700 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 text-xs font-medium text-emerald-700 dark:text-emerald-400 mb-3">
             <Sparkles className="h-3.5 w-3.5" />
             Interaction Checker
           </div>

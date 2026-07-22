@@ -15,7 +15,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-24 lg:pb-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="animate-fade-up">
-            <Badge className="mb-6 gap-1.5 bg-white/70 backdrop-blur border border-emerald-200 text-emerald-700 hover:bg-white/80 rounded-full px-3 py-1 shadow-sm">
+            <Badge className="mb-6 gap-1.5 bg-white/70 dark:bg-white/5 backdrop-blur border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:bg-white/80 rounded-full px-3 py-1 shadow-sm">
               <Sparkles className="h-3.5 w-3.5" />
               AI-Powered
             </Badge>
@@ -37,7 +37,7 @@ export function Hero() {
                 </Button>
               </Link>
               <a href="#about">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl h-12 px-6 bg-white/60 backdrop-blur border-slate-200 hover:bg-white">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-xl h-12 px-6 bg-white/60 dark:bg-white/5 backdrop-blur border-border hover:bg-white dark:hover:bg-white/10">
                   Learn More
                 </Button>
               </a>

@@ -20,7 +20,7 @@ export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
             Enter two medicine names to check possible interactions.
           </p>
         </div>
-        <div className="hidden sm:grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+        <div className="hidden sm:grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
           <Pill className="h-5 w-5" />
         </div>
       </div>
@@ -33,7 +33,7 @@ export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
             value={drug1}
             onChange={(e) => setDrug1(e.target.value)}
             placeholder="Search Drug..."
-            className="pl-10 h-12 rounded-xl bg-white/70 backdrop-blur border-slate-200 focus-visible:ring-emerald-500"
+            className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>
 
@@ -44,9 +44,9 @@ export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
             variant="outline"
             size="icon"
             aria-label="Swap drugs"
-            className="h-11 w-11 rounded-full border-emerald-200 bg-white/70 hover:bg-emerald-50 hover:border-emerald-300 hover:rotate-180 transition-all duration-300 shadow-sm"
+            className="h-11 w-11 rounded-full border-emerald-200 dark:border-emerald-500/30 bg-white/70 dark:bg-white/5 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:border-emerald-300 hover:rotate-180 transition-all duration-300 shadow-sm"
           >
-            <ArrowLeftRight className="h-4 w-4 text-emerald-600" />
+            <ArrowLeftRight className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
           </Button>
         </div>
 
@@ -57,7 +57,7 @@ export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
             value={drug2}
             onChange={(e) => setDrug2(e.target.value)}
             placeholder="Search Drug..."
-            className="pl-10 h-12 rounded-xl bg-white/70 backdrop-blur border-slate-200 focus-visible:ring-emerald-500"
+            className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>
       </div>
