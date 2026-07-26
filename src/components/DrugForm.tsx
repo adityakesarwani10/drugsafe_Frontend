@@ -1,13 +1,27 @@
 // @ts-nocheck
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftRight, Search, Pill } from "lucide-react";
+import { ArrowLeftRight, Search, Pill, ChevronDown, Beaker } from "lucide-react";
 
-export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
+export function DrugForm({
+  drug1,
+  drug2,
+  setDrug1,
+  setDrug2,
+  smiles1 = "",
+  smiles2 = "",
+  setSmiles1 = () => {},
+  setSmiles2 = () => {},
+}) {
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   const swap = () => {
     setDrug1(drug2);
     setDrug2(drug1);
+    setSmiles1(smiles2);
+    setSmiles2(smiles1);
   };
 
   return (
@@ -60,6 +74,41 @@ export function DrugForm({ drug1, drug2, setDrug1, setDrug2 }) {
             className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>
+      </div>
+
+      <div className="mt-5">
+        <button
+          type="button"
+          onClick={() => setShowAdvanced((v) => !v)}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 transition"
+        >
+          <Beaker className="h-3.5 w-3.5" />
+          Advanced: provide SMILES (for unknown drugs)
+          <ChevronDown className={`h-3.5 w-3.5 transition-transform ${showAdvanced ? "rotate-180" : ""}`} />
+        </button>
+
+        {showAdvanced && (
+          <div className="mt-3 grid md:grid-cols-2 gap-3 md:gap-4 animate-fade-up">
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-1.5 ml-1">SMILES 1 (optional)</label>
+              <Input
+                value={smiles1}
+                onChange={(e) => setSmiles1(e.target.value)}
+                placeholder="e.g. CC(=O)OC1=CC=CC=C1C(=O)O"
+                className="h-11 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500 font-mono text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-1.5 ml-1">SMILES 2 (optional)</label>
+              <Input
+                value={smiles2}
+                onChange={(e) => setSmiles2(e.target.value)}
+                placeholder="e.g. CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"
+                className="h-11 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500 font-mono text-xs"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </Card>
   );
