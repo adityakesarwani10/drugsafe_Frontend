@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { predictInteraction, generateReport, downloadReport } from "@/services/api";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -27,33 +28,45 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
-  const [drug1, setDrug1] = useState("Paracetamol");
-  const [drug2, setDrug2] = useState("Ibuprofen");
+  const [drug1, setDrug1] = useState("Verapamil");
+  const [drug2, setDrug2] = useState("Magnesium citrate");
+  const [smiles1, setSmiles1] = useState("");
+  const [smiles2, setSmiles2] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  const generate = () => {
+  const generate = async () => {
     if (!drug1.trim() || !drug2.trim()) {
       toast.error("Please enter both medicine names.");
       return;
     }
     setLoading(true);
     setResult(null);
-    setTimeout(() => {
-      setResult({
-        drug1: drug1.trim(),
-        drug2: drug2.trim(),
-        severity: "SEVERE",
-        interaction: "These medicines may increase kidney damage risk when taken together.",
-        recommendation: "Avoid taking together unless prescribed by a healthcare professional.",
-      });
+    try {
+      const res = await predictInteraction({ drug1, drug2, smiles1, smiles2 });
+      setResult(res.data);
+      toast.success(res.message || "Interaction report generated.");
+    } catch (e) {
+      toast.error(e.message || "Prediction failed.");
+    } finally {
       setLoading(false);
-      toast.success("Interaction report generated.");
-    }, 1400);
+    }
   };
 
-  const generatePDF = () => {
-    toast.success("PDF export coming soon.");
+  const handleGeneratePDF = async () => {
+    if (!result) return;
+    setPdfLoading(true);
+    try {
+      const res = await generateReport({ drug1, drug2, smiles1, smiles2 });
+      const { filename, download_url } = res.data || {};
+      downloadReport(download_url || filename);
+      toast.success("Report ready — download started.");
+    } catch (e) {
+      toast.error(e.message || "Report generation failed.");
+    } finally {
+      setPdfLoading(false);
+    }
   };
 
   return (
@@ -70,7 +83,16 @@ function Dashboard() {
         </div>
 
         <div className="grid gap-6">
-          <DrugForm drug1={drug1} drug2={drug2} setDrug1={setDrug1} setDrug2={setDrug2} />
+          <DrugForm
+            drug1={drug1}
+            drug2={drug2}
+            setDrug1={setDrug1}
+            setDrug2={setDrug2}
+            smiles1={smiles1}
+            smiles2={smiles2}
+            setSmiles1={setSmiles1}
+            setSmiles2={setSmiles2}
+          />
 
           <Card className="glass-card rounded-3xl p-6 sm:p-8 border-0 animate-fade-up [animation-delay:80ms]">
             <div className="flex items-start justify-between gap-4 mb-6">
@@ -98,7 +120,7 @@ function Dashboard() {
                   </>
                 )}
               </Button>
-              <PDFButton disabled={!result} onClick={generatePDF} />
+              <PDFButton disabled={!result} loading={pdfLoading} onClick={handleGeneratePDF} />
             </div>
           </Card>
 
@@ -109,7 +131,7 @@ function Dashboard() {
               <div className="text-sm text-muted-foreground mt-1">Consulting trusted medical data.</div>
             </Card>
           ) : result ? (
-            <ResultCard result={result} onGeneratePDF={generatePDF} />
+            <ResultCard result={result} onGeneratePDF={handleGeneratePDF} pdfLoading={pdfLoading} />
           ) : (
             <EmptyState />
           )}
