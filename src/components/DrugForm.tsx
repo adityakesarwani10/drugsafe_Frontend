@@ -1,9 +1,19 @@
-// @ts-nocheck
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftRight, Search, Pill, ChevronDown, Beaker } from "lucide-react";
+
+interface DrugFormProps {
+  drug1: string;
+  drug2: string;
+  setDrug1: (value: string) => void;
+  setDrug2: (value: string) => void;
+  smiles1?: string;
+  smiles2?: string;
+  setSmiles1?: (value: string) => void;
+  setSmiles2?: (value: string) => void;
+}
 
 export function DrugForm({
   drug1,
@@ -14,7 +24,7 @@ export function DrugForm({
   smiles2 = "",
   setSmiles1 = () => {},
   setSmiles2 = () => {},
-}) {
+}: DrugFormProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const swap = () => {
@@ -42,11 +52,11 @@ export function DrugForm({
       <div className="grid md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-4 items-center">
         <div className="relative">
           <label className="block text-xs font-medium text-muted-foreground mb-1.5 ml-1">Drug 1</label>
-          <Search className="absolute left-3.5 top-[38px] h-4 w-4 text-muted-foreground pointer-events-none" />
+          <Search className="absolute left-3.5 top-9.5 h-4 w-4 text-muted-foreground pointer-events-none" />
           <Input
             value={drug1}
             onChange={(e) => setDrug1(e.target.value)}
-            placeholder="Search Drug..."
+            placeholder="Paracetamol"
             className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>
@@ -66,11 +76,11 @@ export function DrugForm({
 
         <div className="relative">
           <label className="block text-xs font-medium text-muted-foreground mb-1.5 ml-1">Drug 2</label>
-          <Search className="absolute left-3.5 top-[38px] h-4 w-4 text-muted-foreground pointer-events-none" />
+          <Search className="absolute left-3.5 top-9.5 h-4 w-4 text-muted-foreground pointer-events-none" />
           <Input
             value={drug2}
             onChange={(e) => setDrug2(e.target.value)}
-            placeholder="Search Drug..."
+            placeholder="Vitamin C"
             className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>

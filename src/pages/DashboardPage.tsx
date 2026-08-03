@@ -1,5 +1,3 @@
-// @ts-nocheck
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -13,28 +11,14 @@ import { Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { predictInteraction, generateReport, downloadReport } from "@/services/api";
 
-export const Route = createFileRoute("/dashboard")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard — DrugSave" },
-      { name: "description", content: "Check drug interactions with AI severity analysis. Enter two medicines and generate an instant report." },
-      { property: "og:title", content: "DrugSave Dashboard" },
-      { property: "og:description", content: "Check drug interactions with AI severity analysis." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Dashboard,
-});
-
-function Dashboard() {
-  const [drug1, setDrug1] = useState("Verapamil");
-  const [drug2, setDrug2] = useState("Magnesium citrate");
+export default function DashboardPage() {
+  const [drug1, setDrug1] = useState("");
+  const [drug2, setDrug2] = useState("");
   const [smiles1, setSmiles1] = useState("");
   const [smiles2, setSmiles2] = useState("");
   const [loading, setLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<Record<string, any> | null>(null);
 
   const generate = async () => {
     if (!drug1.trim() || !drug2.trim()) {
@@ -47,7 +31,7 @@ function Dashboard() {
       const res = await predictInteraction({ drug1, drug2, smiles1, smiles2 });
       setResult(res.data);
       toast.success(res.message || "Interaction report generated.");
-    } catch (e) {
+    } catch (e: any) {
       toast.error(e.message || "Prediction failed.");
     } finally {
       setLoading(false);
@@ -62,7 +46,7 @@ function Dashboard() {
       const { filename, download_url } = res.data || {};
       downloadReport(download_url || filename);
       toast.success("Report ready — download started.");
-    } catch (e) {
+    } catch (e: any) {
       toast.error(e.message || "Report generation failed.");
     } finally {
       setPdfLoading(false);
@@ -141,3 +125,4 @@ function Dashboard() {
     </div>
   );
 }
+

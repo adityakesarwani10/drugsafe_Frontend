@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
@@ -15,7 +14,13 @@ const statusMap = {
   SEVERE: { label: "DANGEROUS", subtitle: "These medicines may seriously interact.", ring: "from-red-500 to-rose-600", icon: AlertTriangle, iconBg: "bg-red-100 text-red-600 dark:bg-red-500/15 dark:text-red-400" },
 };
 
-export function ResultCard({ result, onGeneratePDF, pdfLoading = false }) {
+interface ResultCardProps {
+  result: Record<string, any>;
+  onGeneratePDF: () => void;
+  pdfLoading?: boolean;
+}
+
+export function ResultCard({ result, onGeneratePDF, pdfLoading = false }: ResultCardProps) {
   const badgeSeverity = mapSeverityToBadge(result.severity);
   const status = statusMap[badgeSeverity] || statusMap.MODERATE;
   const StatusIcon = status.icon;
@@ -117,7 +122,7 @@ export function ResultCard({ result, onGeneratePDF, pdfLoading = false }) {
   );
 }
 
-function DetailBox({ label, value }) {
+function DetailBox({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-border bg-white/60 dark:bg-white/5 backdrop-blur p-4 flex items-center gap-3">
       <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
@@ -131,7 +136,7 @@ function DetailBox({ label, value }) {
   );
 }
 
-function MetaStat({ label, value }) {
+function MetaStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-border bg-white/50 dark:bg-white/5 backdrop-blur p-3">
       <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{label}</div>
@@ -140,7 +145,7 @@ function MetaStat({ label, value }) {
   );
 }
 
-function TextBlock({ title, text }) {
+function TextBlock({ title, text }: { title: string; text: string }) {
   return (
     <div className="rounded-2xl border border-border bg-white/50 dark:bg-white/5 backdrop-blur p-4">
       <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">{title}</div>

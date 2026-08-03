@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useLocation } from "react-router-dom";
 import { Shield, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -7,12 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-
-  const links = [
-    { to: "/#about", label: "About Us", type: "hash" as const },
-    { to: "/dashboard", label: "Dashboard", type: "route" as const, primary: true },
-  ];
+  const pathname = useLocation().pathname;
 
   return (
     <header className="sticky top-0 z-50 glass-nav">
@@ -36,7 +31,7 @@ export function Navbar() {
                 About Us
               </a>
             ) : (
-              <Link to="/" hash="about" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/#about" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 About Us
               </Link>
             )}

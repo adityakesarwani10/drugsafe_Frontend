@@ -1,8 +1,9 @@
-// @ts-nocheck
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, AlertTriangle, AlertCircle, ShieldAlert } from "lucide-react";
 
-const config = {
+type Severity = "SAFE" | "MILD" | "MODERATE" | "SEVERE";
+
+const config: Record<Severity, { label: string; className: string; icon: React.ComponentType<{ className?: string }> }> = {
   SAFE: {
     label: "SAFE",
     className: "bg-emerald-100 text-emerald-700 border-emerald-200",
@@ -25,7 +26,7 @@ const config = {
   },
 };
 
-export function SeverityBadge({ severity = "SEVERE" }) {
+export function SeverityBadge({ severity = "SEVERE" }: { severity?: Severity }) {
   const c = config[severity] || config.SEVERE;
   const Icon = c.icon;
   return (

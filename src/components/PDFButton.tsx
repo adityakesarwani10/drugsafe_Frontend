@@ -1,8 +1,14 @@
-// @ts-nocheck
 import { Button } from "@/components/ui/button";
 import { FileDown, Loader2 } from "lucide-react";
 
-export function PDFButton({ disabled = false, loading = false, variant = "default", onClick }) {
+interface PDFButtonProps {
+  disabled?: boolean;
+  loading?: boolean;
+  variant?: "default" | "outline";
+  onClick: () => void;
+}
+
+export function PDFButton({ disabled = false, loading = false, variant = "default", onClick }: PDFButtonProps) {
   const Icon = loading ? Loader2 : FileDown;
   const label = loading ? "Generating..." : "Generate PDF";
   if (variant === "outline") {
