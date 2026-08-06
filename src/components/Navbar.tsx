@@ -18,7 +18,7 @@ export function Navbar() {
               <Shield className="h-5 w-5 text-white" strokeWidth={2.5} />
             </div>
             <div className="min-w-0">
-              <div className="text-base font-bold tracking-tight leading-none">DrugSave</div>
+              <div className="text-base font-bold tracking-tight leading-none">DrugSafe</div>
               <div className="text-[11px] text-muted-foreground leading-tight mt-0.5 hidden sm:block">
                 Smart Drug Interaction Checker
               </div>
