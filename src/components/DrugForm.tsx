@@ -56,7 +56,7 @@ export function DrugForm({
           <Input
             value={drug1}
             onChange={(e) => setDrug1(e.target.value)}
-            placeholder="Paracetamol"
+            placeholder="Folic Acid"
             className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>
@@ -80,7 +80,7 @@ export function DrugForm({
           <Input
             value={drug2}
             onChange={(e) => setDrug2(e.target.value)}
-            placeholder="Vitamin C"
+            placeholder="Cavedilol"
             className="pl-10 h-12 rounded-xl bg-white/70 dark:bg-white/5 backdrop-blur border-border focus-visible:ring-emerald-500"
           />
         </div>

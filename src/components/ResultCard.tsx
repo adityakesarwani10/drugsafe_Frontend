@@ -24,10 +24,11 @@ export function ResultCard({ result, onGeneratePDF, pdfLoading = false }: Result
   const badgeSeverity = mapSeverityToBadge(result.severity);
   const status = statusMap[badgeSeverity] || statusMap.MODERATE;
   const StatusIcon = status.icon;
+  console.log("ResultCard rendered with result:", result, "and status:", status);
 
   return (
     <Card className="glass-card rounded-3xl p-6 sm:p-8 border-0 animate-fade-up overflow-hidden relative">
-      <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${status.ring}`} />
+      <div className={`absolute inset-x-0 top-0 h-1 bg-linear-to-r ${status.ring}`} />
 
       <div className="text-xs font-bold tracking-wider text-emerald-600">STEP 3</div>
       <h2 className="mt-1 text-xl font-semibold tracking-tight">View Result</h2>
@@ -39,7 +40,7 @@ export function ResultCard({ result, onGeneratePDF, pdfLoading = false }: Result
           </div>
           <div className="min-w-0">
             <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Interaction Status</div>
-            <div className={`text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r ${status.ring} bg-clip-text text-transparent`}>
+            <div className={`text-3xl sm:text-4xl font-bold tracking-tight bg-linear-to-r ${status.ring} bg-clip-text text-transparent`}>
               {status.label}
             </div>
             <div className="mt-1 text-sm text-muted-foreground">{status.subtitle}</div>
@@ -82,7 +83,20 @@ export function ResultCard({ result, onGeneratePDF, pdfLoading = false }: Result
       </div>
 
       <div className="mt-4 grid gap-4">
-        {result.interaction && <TextBlock title="Interaction" text={result.interaction} />}
+        {result.severity && (
+        <TextBlock
+          title="Interaction"
+          text={`${result.severity}: ${
+            result.severity.toLowerCase() === "mild"
+              ? "Generally considered low risk, but monitor for any unusual symptoms."
+              : result.severity.toLowerCase() === "moderate"
+              ? "Use with caution and follow the recommended precautions. Consult a doctor if needed."
+              : result.severity.toLowerCase() === "severe"
+              ? "Do not take these medicines together without consulting a doctor."
+              : "Please consult a healthcare professional for guidance."
+          }`}
+        />
+      )}
         {result.simple_description && <TextBlock title="Simple Description" text={result.simple_description} />}
         {Array.isArray(result.possible_symptoms) && result.possible_symptoms.length > 0 && (
           <div className="rounded-2xl border border-border bg-white/50 dark:bg-white/5 backdrop-blur p-4">
@@ -106,7 +120,7 @@ export function ResultCard({ result, onGeneratePDF, pdfLoading = false }: Result
         </AlertDescription>
       </Alert>
 
-      <div className="mt-6 rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-gradient-to-r from-emerald-50 to-teal-50/70 dark:from-emerald-500/10 dark:to-teal-500/5 p-5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between">
+      <div className="mt-6 rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-linear-to-r from-emerald-50 to-teal-50/70 dark:from-emerald-500/10 dark:to-teal-500/5 p-5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500 text-white shadow-lg shadow-emerald-500/30">
             <CheckCircle2 className="h-5 w-5" />
